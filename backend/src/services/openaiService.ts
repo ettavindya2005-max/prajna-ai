@@ -3,10 +3,20 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  baseURL: 'https://api.groq.com/openai/v1',
-});
+let openaiClient: OpenAI | null = null;
+
+const getOpenAIClient = () => {
+  if (!openaiClient) {
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY environment variable is missing.");
+    }
+    openaiClient = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+      baseURL: 'https://api.groq.com/openai/v1',
+    });
+  }
+  return openaiClient;
+};
 
 export const generateSummaryAndTasks = async (transcript: string) => {
   try {
@@ -24,7 +34,7 @@ export const generateSummaryAndTasks = async (transcript: string) => {
     ${transcript}
     `;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAIClient().chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [{ role: 'user', content: prompt }],
       response_format: { type: 'json_object' },
@@ -72,7 +82,7 @@ export const answerQuestion = async (question: string, context: string) => {
       ${question}
       `;
   
-      const response = await openai.chat.completions.create({
+      const response = await getOpenAIClient().chat.completions.create({
         model: 'llama-3.3-70b-versatile',
         messages: [{ role: 'user', content: prompt }],
       });
