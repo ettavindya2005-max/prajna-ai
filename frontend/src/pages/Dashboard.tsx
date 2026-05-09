@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { PlusCircle, ListTodo, Users, CheckCircle, BarChart3, Clock } from 'lucide-react';
+import { PlusCircle, ListTodo, CheckCircle, BarChart3, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Dashboard = () => {

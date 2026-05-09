@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, PlusCircle, CheckSquare, Clock, LogOut, Bot } from 'lucide-react';
 import ChatWidget from './ChatWidget';

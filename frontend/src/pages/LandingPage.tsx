@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { Bot, CheckCircle, Zap, ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
